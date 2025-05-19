@@ -1,14 +1,10 @@
 const express = require("express");
-
 const {PORT} = require('./config');
+const {apiRoutes} = require("./routes")
 
 const app = express();
 
-app.get("/",(req,res)=>{
-    console.log("Get Route ");
-    res.send(200);
-})
-
+app.use("/api",apiRoutes);
 
 
 app.listen(PORT,()=>{
