@@ -1,5 +1,5 @@
 const express = require("express");
-const {PORT} = require('./config');
+const {serverConfig,logger} = require('./config');
 const {apiRoutes} = require("./routes")
 
 const app = express();
@@ -7,8 +7,8 @@ const app = express();
 app.use("/api",apiRoutes);
 
 
-app.listen(PORT,()=>{
-    console.log(`Listening on : ${PORT}`);
+app.listen(serverConfig.PORT,()=>{
+    console.log(`Listening on : ${serverConfig.PORT}`);
 })
 
 
