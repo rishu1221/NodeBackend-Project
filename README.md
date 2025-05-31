@@ -23,7 +23,8 @@ ________________________________________________________
 
 6. Sequelize me directly go inside the src folder of your project and then do npx sequelize init . Uske baad apne aap kuch migrations, config.json and seeders and models folder banega. Models ke andar sara code rahega toh make connection and Config.json me sara code rahega toh support that code.ALso install a driver for your sequelize.  
 
-
+DO this inside src
+command  : npx sequelize init 
 Setup for Sequlize
 
 {
@@ -56,3 +57,33 @@ THis is just the configuration for all the environments that our DB will have.
 7. Migration folder - This is simple JS files that contain versions of our DB. THat contains older configurations for our DB particular version.THis file also contains our DB schema changes. If we run each file step by step it will lead to current DB schema and configuration.Like linked list.
 
 8. Seeders  Folder - Started data for your table row.
+
+
+
+FOr creating a DB connection in this Project : 
+
+1. command inside src : npx sequelize init
+2. Config.json is created inside the config folder. Make changes to Dev environment variables inside this file.
+3. Use your own DB username and password and then use Database name.
+4. Come back to terminal execute npx sequelize db:create
+5. This creates a DB names the actual DB name in jSon file.
+
+
+Creating a model in Sequelize
+
+npx sequelize model:generate --name Name of the table --attributes modelNo:string,capacity:integer
+
+THis command creates a file in the models folder with the name of the table.js and then we have our sequelize code inside it.
+
+Now only migration file is created. The changes are not actually done in the DB. We just have the JS code ready for making the change in DB level.
+
+Use command : npm sequelize db:migrate
+
+Isse ab wo table create hoga inside DB. Isse pehle sirf JS file he create hua tha. Ab isse table banega Airplanes and aur ek table banega sequelizemeta.
+
+Airplane : Yeh apna table tha jo models ke andar airplanes.js se create hua
+sequelizemeta : yeh table is used for versioning of migrations. Ab isme ek entry hoga jo contain karega is current migration ka filename.
+
+
+100 BAAT KI EK BAAT : KOI BHI ALTERATION KARNA HAI DB ME TOH MIGRATIONS USE KARENGE. TOH TRACK REHTA HAI ABOUT WHAT CHANGE WENT IT. EMPTY MIGRATION FILE BANAO USING NPX SEQUELIZE MIGRATION:CREATE --NAME TABLENAME
+AND USKO EDIT KARO TO MAKE MY OWN CHANGES. THEN USE NPX SEQUELIZE DB:MIGRATE TO MAKE THOSE CHANGES ON TO THE TABLE.
