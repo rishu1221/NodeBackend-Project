@@ -87,3 +87,21 @@ sequelizemeta : yeh table is used for versioning of migrations. Ab isme ek entry
 
 100 BAAT KI EK BAAT : KOI BHI ALTERATION KARNA HAI DB ME TOH MIGRATIONS USE KARENGE. TOH TRACK REHTA HAI ABOUT WHAT CHANGE WENT IT. EMPTY MIGRATION FILE BANAO USING NPX SEQUELIZE MIGRATION:CREATE --NAME TABLENAME
 AND USKO EDIT KARO TO MAKE MY OWN CHANGES. THEN USE NPX SEQUELIZE DB:MIGRATE TO MAKE THOSE CHANGES ON TO THE TABLE.
+
+
+Things to Understand about repository :
+
+1. Repository me sirf QUery ka code hoga. Model will communicate to repository. Model object is used to pass in the repositroy.
+
+2. Repository import hoga service me . Jaha humlog actual operation karenge DB me.
+
+
+_______________________________________________________________________________________________________
+1. Request aya controller ke pass -> Service. Services use repositories to interact with the DB.
+
+
+Final FLow :  Request → Routes → Controller → Service → Repository → Model → DB
+
+
+____________________________________________________________________________________________________
+1. Yeh sequeluize me models ka scene thoda different hai. Generally mongoose me model banao aur uska object banake use karo. But idhar model banega and then repository ka index.js usko acutal sequelize object me convert karke export karega toh model hamesha index.js se he import hoga ni toh constructor error dega.
