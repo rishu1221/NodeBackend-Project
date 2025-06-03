@@ -50,11 +50,12 @@ class CrudRepository{
 
     async update(id,data){
         try {
-            const response =await  this.model.update(data,{
+            const response =await this.model.update(data,{
                 where : {
                     id : id
                 }
             })
+            return response;
         } catch (error) {
             logger.error("Something went wrong during Update");
             throw error;

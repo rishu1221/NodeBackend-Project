@@ -12,6 +12,29 @@ const createAirplane = async (data)=>{
     }
 }
 
+const updateAirPlane = async (id,data)=>{
+    try {
+        const airPlane = await airplaneObject.update(id,data);
+        return airPlane;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+const getAllData = async ()=>{
+    try {
+        const airplane = await airplaneObject.getAll();
+        return airplane;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+
 module.exports = {
-    createAirplane
+    createAirplane,
+    updateAirPlane,
+    getAllData
 };
