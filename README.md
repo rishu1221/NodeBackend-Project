@@ -105,3 +105,10 @@ Final FLow :  Request → Routes → Controller → Service → Repository → M
 
 ____________________________________________________________________________________________________
 1. Yeh sequeluize me models ka scene thoda different hai. Generally mongoose me model banao aur uska object banake use karo. But idhar model banega and then repository ka index.js usko acutal sequelize object me convert karke export karega toh model hamesha index.js se he import hoga ni toh constructor error dega.
+
+
+_______________________________________________________________________________________________________
+1. Error handling Part :
+
+- Jab bhi parameters missing ho API me toh usko alag se handle karna hota hai. Usko middleware se handle kar lenge. THis is badRequest (400 error code).
+
