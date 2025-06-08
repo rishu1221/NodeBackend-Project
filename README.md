@@ -85,6 +85,8 @@ Airplane : Yeh apna table tha jo models ke andar airplanes.js se create hua
 sequelizemeta : yeh table is used for versioning of migrations. Ab isme ek entry hoga jo contain karega is current migration ka filename.
 
 
+
+
 100 BAAT KI EK BAAT : KOI BHI ALTERATION KARNA HAI DB ME TOH MIGRATIONS USE KARENGE. TOH TRACK REHTA HAI ABOUT WHAT CHANGE WENT IT. EMPTY MIGRATION FILE BANAO USING NPX SEQUELIZE MIGRATION:CREATE --NAME TABLENAME
 AND USKO EDIT KARO TO MAKE MY OWN CHANGES. THEN USE NPX SEQUELIZE DB:MIGRATE TO MAKE THOSE CHANGES ON TO THE TABLE.
 
@@ -112,3 +114,42 @@ ________________________________________________________________________________
 
 - Jab bhi parameters missing ho API me toh usko alag se handle karna hota hai. Usko middleware se handle kar lenge. THis is badRequest (400 error code).
 
+- Hamesha raw json response me bhejne se acha hai ki ek standard object bana le. Ek error ke liye banega and ek SuccessObject banega. Dono utils ke andar common folder me rakhenge. But agar custom Error object bhejna hai toh kya karenge.
+
+- Uska solution hai ki humlog hamesha utils ke andar ek error folder banyenge . Ek class jo error ko extend karega usme initialiation karke usko throw karenge. This is important part.
+
+- Har layer me apne ko error handling karna apdega. Start from Repository to Service and then COntroller layer.
+
+
+_________________________________________________________
+Another Important thing : 
+
+[ Postman Request (HTTP POST /airplanes) ]
+                ↓
+[ Express Route Handler (routes/airplaneRoutes.js) ]
+                ↓
+[ Controller (e.g., airplaneController.js) ]
+                ↓
+[ Service Layer (optional, handles business logic) ]
+                ↓
+[ Sequelize Model Method (Airplane.create(data)) ]
+                ↓
+[ Sequelize Validates Input Based on Model Definition ]
+    └── If validation fails → throws SequelizeValidationError
+    └── If validation passes → generates SQL INSERT
+                ↓
+[ DB Query Executed (INSERT INTO airplanes...) ]
+                ↓
+[ DB responds with success or failure (e.g., PK error) ]
+                ↓
+[ Response sent back to Postman ]
+
+Models ka jo bhi defenition hai that is used and validated before sequelize make a call to DB. Models is JS code and something that is there in our end not on DB. Migations use karte toh DB me wo validation lag jata (DB level par) and agar models me updated ni bhi hai toh bhi call hone ke baad DB error deta.
+
+2 scenario : 
+a . Model me validation hai but migartion ke thorugh DB pe ni. TOh DB call se pehle he error milta.
+
+b. Model me validation ni hai but migartion ke throguh DB level pe hai . TOh DB se error milta.
+
+_______________________________________________________________
+1. In international Project we never use raw strings. We have a strings folder we use key value pair and then use them. Sometimes we use transalation service to convert the message according to the user's language.
