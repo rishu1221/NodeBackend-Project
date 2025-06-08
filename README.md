@@ -153,3 +153,42 @@ b. Model me validation ni hai but migartion ke throguh DB level pe hai . TOh DB 
 
 _______________________________________________________________
 1. In international Project we never use raw strings. We have a strings folder we use key value pair and then use them. Sometimes we use transalation service to convert the message according to the user's language.
+
+
+Seeders in Sequelize
+Inside SRC folder of your project
+command :  npx sequelize seed:generate --name add-ariplanes
+
+command for running my seeder file : npx sequelize db:seed:all
+command for reverting my seed file : npx sequelize db:seed:undo:all
+
+This creates your seeder file in the seeders folder with name add-ariplanes.
+
+Seeders are basically used for populating bulk values into our models.
+
+
+
+
+ABhi tak humlog sirf practices he sikh rahe the and sequelize stuff.
+___________________________________________________________________________________________________
+Other important sytem designs : Notification Systems,News feed for twitter , 
+
+
+Now Actual Project Starts : 
+
+Flight Booking System Backend :
+
+Description : 
+
+Monolith bhi rakh sakte the but ab dekho Flight booking system is Read heavy . WHy so ? 
+
+Kyuki Har user spends more time in choosing the flight. But booking flow toh confirm hone ke baad he hoga that is write. Toh most of the time users will query a lot of things. But booking will be less.
+
+Agar sab kuch monolith me store karte hai toh problem aayega ki quering ko scale up karne ke liye booking bhi scale up hoga. So isiliye we need more scale for FLight Search Rather than Flight booking.
+
+Imagine 2 service hai Flight Search and Then FLight booking. Booking only needs to scale up when we have a sale at our site or any reason for increase in People moving from One place to another.
+
+But searching me hamehsa he load rahega.
+
+Toh lets choose microserivce for individual scaling of services.
+
