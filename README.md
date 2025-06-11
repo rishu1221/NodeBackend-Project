@@ -192,3 +192,23 @@ But searching me hamehsa he load rahega.
 
 Toh lets choose microserivce for individual scaling of services.
 
+Non-Functional Requirements :
+
+1. Application expects more flight searches than flight bookings (Read heavy)
+2. Application expects 100000 bookings in 1 quarter.
+3. Application will be make sure that the seat booked by 1 person shouldnt be booked by another person(Handling concurrency bugs).
+4. We dont change the price of flight once user has initiated payements.
+5. Application should be able to autoscale itself 3x the usual traffic.
+6. We should persist the data of any user for more than 10 years.(More of a compliance related thing).
+
+System Design Diagram : 
+
+Load Balancer  : Just balances out our load across different replicas for scaling. Isme ek aur load balancer stand by pe rakh sakte hai toh avoid single point of failure.
+
+API Gateway : Helps to protect address of other services on which our services are hosted. (Using reverse proxy). 
+              API gateway bhi service jaise he hai Bas uska code humlog usually alag likhte hai.It contains following things :
+              1. Authentication Logic(Jo bhi request aaya hai does it have access to our services or not.)
+              2. Reverse Proxy (NGINX) (For security purposes) (Acts like services but it is not).
+              3. Logic for Rate limiter.
+              
+![alt text](image.png)
