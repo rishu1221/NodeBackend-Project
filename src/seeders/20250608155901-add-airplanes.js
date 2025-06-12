@@ -23,6 +23,12 @@ module.exports = {
     capacity : 20,
     createdAt : new Date(),
     updatedAt : new Date()
+   },
+   {
+    modelNumber : "Airbus A320 Neo",
+    capacity : 180,
+    createdAt : new Date(),
+    updatedAt : new Date()
    }
    ])
   },

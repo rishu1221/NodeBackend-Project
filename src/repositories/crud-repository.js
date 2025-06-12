@@ -1,4 +1,6 @@
-const { logger } = require("../config")
+const { StatusCodes } = require("http-status-codes");
+const { logger } = require("../config");
+const AppError = require("../utils/errors/app-error");
 
 class CrudRepository{
     constructor(model){
@@ -6,60 +8,44 @@ class CrudRepository{
     } 
 
     async create(data){
-        try {
+        
             const response = await this.model.create(data);
             return response;
-        } catch (error) {
-            logger.error('something went wrong in creation');
-            throw error;
-        }
     }
 
     async destroy(data){
-        try {
-            const repsonse = await this.model.destroy({
+        
+            const response = await this.model.destroy({
                 where : {
                     id : data
                 }
             });
-        } catch (error) {
-            logger.error('Something went wrong while deleting');
-            throw error;
-        }
+            return response;
     }
 
     async get(data){
-        try {
-            const response =await  this.model.findByPk(data);
+      
+            const response = await  this.model.findByPk(data);
+            if(!response){
+                throw new AppError("Cannot find Data",StatusCodes.NOT_FOUND);
+            }
             return response;
-        } catch (error) {
-            logger.error("Something went wrong during fetch");
-            throw error;
-        }
     }
 
     async getAll(){
-        try {
+       
             const response =await  this.model.findAll();
             return response;
-        } catch (error) {
-            logger.error("Something went wrong during fetch All");
-            throw error;
-        }
     }
 
     async update(id,data){
-        try {
             const response =await this.model.update(data,{
                 where : {
                     id : id
                 }
             })
             return response;
-        } catch (error) {
-            logger.error("Something went wrong during Update");
-            throw error;
-        }
+       
     }
 }
 

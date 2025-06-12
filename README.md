@@ -212,3 +212,21 @@ API Gateway : Helps to protect address of other services on which our services a
               3. Logic for Rate limiter.
               
 ![alt text](image.png)
+
+
+Low Level Design :
+
+Isme basically yeh decide karte hai ki bhai kya structure hoga code ka. Agar apne ko kya class banana hai toh usme kya kya fields hoga. Har project me ek entity hota hai . Lets say Flights booking ka backend hai toh isme Flights class banaoge jisme flights ka characteristics hoga jaise capacity,model-number aur bhi kuch kuch parameters. Ab iska booking hoga toh bookings class banega jo ki bookings ke bare me batayega jaise from,to,date,people yeh sab.
+
+ClassNames : 
+
+1. Flights - WHich flight is schedule from where to where
+2. Airplanes - Which airplanes are there and what are their capacity of passengers
+3. City - Contains city codes for each City
+4. Airports - Contains airport codes and the city they belong to
+5. Bookings - Contains booking information for all the users
+
+
+
+
+
