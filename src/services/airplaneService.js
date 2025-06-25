@@ -47,11 +47,21 @@ const getAirplane = async (id)=>{
     }
 }
 
+const destroyAirplane = async (id)=>{
+    try {
+        const airplane = await airplaneObject.destroy(id);
+        return airplane;
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 
 module.exports = {
     createAirplane,
     getAllAirplanes,
-    getAirplane
+    getAirplane,
+    destroyAirplane
     
 };
