@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const { logger } = require("../config");
 const AppError = require("../utils/errors/app-error");
+const { error } = require("../utils/common/success-response");
 
 class CrudRepository{
     constructor(model){
@@ -20,6 +21,9 @@ class CrudRepository{
                     id : data
                 }
             });
+            if(response == 0){
+                throw new AppError("ID is not found",StatusCodes.NOT_FOUND);
+            }
             return response;
     }
 
@@ -27,7 +31,7 @@ class CrudRepository{
       
             const response = await  this.model.findByPk(data);
             if(!response){
-                throw new AppError("Cannot find Data",StatusCodes.NOT_FOUND);
+                throw new AppError("Data is not found",StatusCodes.NOT_FOUND);
             }
             return response;
     }

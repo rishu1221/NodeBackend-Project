@@ -76,12 +76,15 @@ const getAirplane = async (req,res)=>{
 
 const deleteAirplane = async (req,res) =>{
     try {
-        const airplane = AirplaneService.destroyAirplane(req.params.id);
+        const airplane =await AirplaneService.destroyAirplane(req.params.id);
+        console.log(airplane);
         successReponse.data = airplane;
         return res.status(StatusCodes.OK).json(successReponse);
     } catch (error) {
-        errorResponse.error = error;
-        return res.status(error.statusCode).json(errorResponse);
+        console.log(error);
+        errorResponse.error = error.name;
+        errorResponse.message = error.original.sqlMessage;
+        return res.status(StatusCodes.BAD_REQUEST).json(errorResponse);
     }
 }
 
