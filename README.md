@@ -95,7 +95,9 @@ Things to Understand about repository :
 
 1. Repository me sirf QUery ka code hoga. Model will communicate to repository. Model object is used to pass in the repositroy.
 
-2. Repository import hoga service me . Jaha humlog actual operation karenge DB me.
+2. Simple rule : Models sirf repository se communicate karta hai. Model humko table object deta hai and then repository me humlog function banate hai that internally calls sequelize method to some operation on the table. 
+
+3. Repository import hoga service me . Jaha humlog actual operation karenge DB me.
 
 
 _______________________________________________________________________________________________________
@@ -225,6 +227,12 @@ ClassNames :
 3. City - Contains city codes for each City
 4. Airports - Contains airport codes and the city they belong to
 5. Bookings - Contains booking information for all the users
+
+
+
+Again coding things :
+
+1. Agar delete karte waqt sql 0 return kare that means data wasn't present.
 
 
 
